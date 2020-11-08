@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Datamining</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet" /> 
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" /> 
+    <link href="/static/fontawesome/css/all.min.css" rel="stylesheet" /> 
+    <link href="/static/css/templatemo-diagoona.css" rel="stylesheet" />
+
+</head>
+
+<div class="header"><img src="/static/img/Adidas_logo.png" alt="">
+    <h3 class="tm-sitename text-uppercase">ทำนายการเลือกรองเท้า ADIDAS</h3>
+    <p style="">ป้อนข้อมูลเพื่อทำนายรุ่นที่เหมาะกับคุณ</p>
+  </div>
+
+<body>
+    <div class="tm-container">        
+        <div>
+    
+            
+            <div class="tm-row">
+                <div class="tm-col-left"></div>
+                <main class="tm-col-right">
+                    <div class="input-box">
+                        <form action="{{ url_for('predict')}}" method="post">
+            
+                            
+                            
+                            <!-- Excel Column 2 -->
+                            <div class="form-group">
+                                <p><h4>เพศ</h4></p>
+                               
+                                <td>
+                                    <input type="radio" name="Sex" value="0010" checked>ชาย
+                                    <input type="radio" name="Sex" value="1000">หญิง
+                                    <input type="radio" name="Sex" value="0100">LGBT
+                                    <input type="radio" name="Sex" value="0001">ไม่ต้องการะบุ
+            
+            
+                                </td>
+                            </div>
+            
+                            <!-- Excel Column 4 -->
+                            <div class="form-group">
+                                <p><h4>อายุ</h4></p>
+                                <td>
+                                    <input type="radio" name="Age" value="00010">น้อยกว่า 18ปี
+                                    <input type="radio" name="Age" value="10000">18-23 ปี
+                                    <input type="radio" name="Age" value="01000">24-30 ปี
+                                    <input type="radio" name="Age" value="00100">30-36ปี
+                                    <input type="radio" name="Age" value="00001">มากกว่า 36 ปี
+            
+                                </td>
+                            </div>
+                        
+            
+                            <!-- Excel Column 3 -->
+                            <div class="form-group">
+                                <label for="Career-from">อาชีพ</label>
+                                <select class="form-control" id="Career-form" name="Career">
+                                    <option value=""></option>
+                                    <option value="000100">นักเรียน/นักศึกษา</option>
+                                    <option value="000001">รัฐวิสาหกิจ</option>
+                                    <option value="010000">บริษัทเอกชน</option>
+                                    <option value="001000">ธุรกิจส่วนตัว</option>
+                                    <option value="000010">ฟรีแลนซ์</option>
+                                    <option value="100000">ไม่ระบุ</option>
+                                </select>
+                            </div>
+            
+                            <!-- Excel Column 1 -->
+                            <div class="form-group">
+                                <label for="Income-from">รายได้เฉลี่ยต่อเดือน</label>
+                                <select class="form-control" id="Income-form" name="Income">
+                                    <option value=""></option>
+                                    <option value="00000010">น้อยกว่า 5,000 บาท</option>
+                                    <option value="00001000">5,000 - 15,000 บาท</option>
+                                    <option value="10000000">15,001 - 20,000 บาท</option>
+                                    <option value="01000000">20,001 - 25,000 บาท</option>
+                                    <option value="00100000">25,001 - 40,000 บาท</option>
+                                    <option value="00010000">40,001 - 60,000 บาท</option>
+                                    <option value="00000100">60,001 - 100,000 บาท</option>
+                                    <option value="00000001">มากกว่า 100,000 บาท</option>
+            
+                                </select>
+                            </div>
+            
+                            <!-- Excel Column 6 -->
+                            <div class="form-group">
+                                <label for="Budget-from"> คุณมีงบประมาณในการเลือกซื้อรองเท้าเท่าไหร่</label>
+                                <select class="form-control" id="Budget-form" name="Budget">
+                                    <option value=""></option>
+                                    <option value="000010">น้อยกว่า 1,500 บาท</option>
+                                    <option value="100000">1,500 - 3,000 บาท</option>
+                                    <option value="010000">3,001 - 4,500 บาท</option>
+                                    <option value="001000">4,501 - 6,000 บาท</option>
+                                    <option value="000100">6,501 - 8,000 บาท</option>
+                                    <option value="000001">มากกว่า 8,000 บาท</option>
+                                   
+                                    
+                                </select>
+                            </div>
+            
+                            <!-- Excel Column 5 -->
+                            <div class="form-group">
+                                <label for="Usage-from">ลักษณะการใช้งานรองเท้าของคุณ  อันดับที่ 1</label>
+                                <select class="form-control" id="Usage-form" name="Usage characteristics No1">
+                                    <option value=""></option>
+                                    <option value="0000100">มีความแข็งแรงทนทาน ใช้งานได้นาน</option>
+                                    <option value="0010000">สะดวกต่อการใส่รองเท้าและถอดรองเท้า</option>
+                                    <option value="0000010">เบาสบาย นุ่ม ระบายอากาศได้ดี</option>
+                                    <option value="0100000">ง่ายต่อการทำความสะอาด</option>
+                                    <option value="0000001">กระชับ ยืดหยุ่น เข้ารูปทรง</option>
+                                    <option value="1000000">ใช้ได้กับทุกสถานการณ์</option>
+                                    <option value="0001000">รับแรงกระแทกได้ดี</option>
+            
+            
+                                </select>
+                            </div>
+                
+                        <div class="form-group">
+                            <label for="Usage2-from">ลักษณะการใช้งานรองเท้าของคุณ  อันดับที่ 2</label>
+                            <select class="form-control" id="Usage2-form" name="Usage characteristics No2">
+                                <option value=""></option>
+                                <option value="00001000">มีความแข็งแรงทนทาน ใช้งานได้นาน</option>
+                                <option value="00100000">สะดวกต่อการใส่รองเท้าและถอดรองเท้า</option>
+                                <option value="00000100">เบาสบาย นุ่ม ระบายอากาศได้ดี</option>
+                                <option value="01000000">ง่ายต่อการทำความสะอาด</option>
+                                <option value="00000001">กระชับ ยืดหยุ่น เข้ารูปทรง</option>
+                                <option value="10000000">ใช้ได้กับทุกสถานการณ์</option>
+                                <option value="00010000">รับแรงกระแทกได้ดี</option>
+                                <option value="00000010">ไม่มี</option>
+            
+            
+                            </select>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="situ3-from">ลักษณะการใช้งานรองเท้าของคุณ  อันดับที่ 3</label>
+                            <select class="form-control" id="Usage3-form" name="Usage characteristics No3">
+                                <option value=""></option>
+                                <option value="00001000">มีความแข็งแรงทนทาน ใช้งานได้นาน</option>
+                                <option value="00100000">สะดวกต่อการใส่รองเท้าและถอดรองเท้า</option>
+                                <option value="00000100">เบาสบาย นุ่ม ระบายอากาศได้ดี</option>
+                                <option value="01000000">ง่ายต่อการทำความสะอาด</option>
+                                <option value="00000001">กระชับ ยืดหยุ่น เข้ารูปทรง</option>
+                                <option value="10000000">ใช้ได้กับทุกสถานการณ์</option>
+                                <option value="00010000">รับแรงกระแทกได้ดี</option>
+                                <option value="00000010">ไม่มี</option>
+            
+            
+                            </select>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="design-from">ลักษณะการออกแบบรองเท้าที่มีผลต่อการเลือกซื้อรองเท้าของคุณ อันดับที่ 1</label>
+                            <select class="form-control" id="design-form" name="Design characteristics No1">
+                                <option value=""></option>
+                                <option value="0001000">มีความคลาสสิก และดั้งเดิม</option>
+                                <option value="0000001">การออกแบบมีความเรียบหรู</option>
+                                <option value="0100000">มีการออกแบบที่มินิมอล เน้นความเรียบง่าย</option>
+                                <option value="0010000">มีการออกแบบตามสไตล์ Street</option>
+                                <option value="1000000">สีสันสดใส</option>
+                                <option value="0000100">มีความทันสมัย ตามเทรนแฟชั่น</option>
+                                <option value="0000010">รองเท้ามีทรงที่ไม่เหมือนรองเท้ารุ่นอื่น ๆ</option>
+                            </select>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="design2-from">ลักษณะการออกแบบรองเท้าที่มีผลต่อการเลือกซื้อรองเท้าของคุณ อันดับที่ 2</label>
+                            <select class="form-control" id="design2-form" name="Design characteristics No2">
+                                <option value=""></option>
+                                <option value="00010000">มีความคลาสสิก และดั้งเดิม</option>
+                                <option value="00000001">การออกแบบมีความเรียบหรู</option>
+                                <option value="01000000">มีการออกแบบที่มินิมอล เน้นความเรียบง่าย</option>
+                                <option value="00100000">มีการออกแบบตามสไตล์ Street</option>
+                                <option value="10000000">สีสันสดใส</option>
+                                <option value="00001000">มีความทันสมัย ตามเทรนแฟชั่น</option>
+                                <option value="00000010">รองเท้ามีทรงที่ไม่เหมือนรองเท้ารุ่นอื่น ๆ</option>
+                                <option value="00000100">ไม่มี</option>
+            
+                            </select>
+                        </div>
+            
+                        <div class="form-group">
+                            <label for="design3-from">ลักษณะการออกแบบรองเท้าที่มีผลต่อการเลือกซื้อรองเท้าของคุณ อันดับที่ 3</label>
+                            <select class="form-control" id="design3-form" name="Design characteristics No3">
+                                <option value=""></option>
+                                <option value="00010000">มีความคลาสสิก และดั้งเดิม</option>
+                                <option value="00000001">การออกแบบมีความเรียบหรู</option>
+                                <option value="01000000">มีการออกแบบที่มินิมอล เน้นความเรียบง่าย</option>
+                                <option value="00100000">มีการออกแบบตามสไตล์ Street</option>
+                                <option value="10000000">สีสันสดใส</option>
+                                <option value="00001000">มีความทันสมัย ตามเทรนแฟชั่น</option>
+                                <option value="00000010">รองเท้ามีทรงที่ไม่เหมือนรองเท้ารุ่นอื่น ๆ</option>
+                                <option value="00000100">ไม่มี</option>
+            
+                            </select>
+                        </div>
+                  
+            
+            
+                          
+            
+                            <button type="submit" class="btn btn-warning btn-lg btn-box">Predict</button>
+                        </form>
+                    </div>
+            
+                    <div class="predict-box">
+                        <div class="predict-label-box">
+                            <p class="predict-label">รองเท้าที่เหมาะสมกับคุณคือรุ่น :</p>
+                        </div>
+                        <p class="predict-result">{{ prediction_text }}</p>
+                    </div>
+            
+                </main>
+            </div>
+        </div>        
+
+        <div class="tm-row">
+            <div class="tm-col-left text-center">            
+                <ul class="tm-bg-controls-wrapper">
+                    <li class="tm-bg-control active" data-id="0"></li>
+                    <li class="tm-bg-control" data-id="1"></li>
+                    <li class="tm-bg-control" data-id="2"></li>
+                    <li class="tm-bg-control" data-id="3"></li>
+                    <li class="tm-bg-control" data-id="4"></li>
+                    <li class="tm-bg-control" data-id="5"></li>
+                </ul>            
+            </div>        
+            <div class="tm-col-right tm-col-footer">
+                <footer class="tm-site-footer text-right">
+                    <p class="mb-0">
+                        <h5 class="page-footer-label">DATA MINING</h5>
+                        <p>สาขาวิชาวิทยาการคอมพิวเตอร์ คณะวิทยาศาสตร์ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง</p>
+                    
+                    </a></p>
+                </footer>
+            </div>  
+
+
+
+            <div class="tm-col-right tm-col-footer">
+                <footer class="tm-site-footer text-right">
+                    <p class="mb-0">
+                        <h5 class="page-footer-label">สมาชิกในกลุ่ม</h5>
+                        
+                    <ul>
+                        <p>60050163</p>
+                        <p>60050164</p>
+                        <p>60050220</p>
+                        <p>60050251</p>
+                        <p>60050256</p>
+                    </ul>
+                </footer>
+            </div> 
+
+
+
+
+        </div>
+
+        
+
+    
+
+        <!-- Diagonal background design -->
+        <div class="tm-bg">
+            <div class="tm-bg-left"></div>
+            <div class="tm-bg-right"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/jquery-3.4.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.backstretch.min.js"></script>
+    <script src="/static/js/templatemo-script.js"></script>
+</body>
+</html>
